@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <title>高校保研率查询</title>
@@ -10,17 +10,16 @@
             margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 600px;
             margin: auto;
         }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-top: 20px;
+
+        h1 {
+            text-align: center;
         }
+
         input {
             width: 100%;
             padding: 12px;
@@ -28,6 +27,7 @@
             border: 1px solid #ccc;
             font-size: 16px;
         }
+
         button {
             width: 100%;
             margin-top: 12px;
@@ -42,16 +42,23 @@
         button:hover {
             background: #357ABD;
         }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
         .rate-item {
             padding: 8px 0;
             font-size: 17px;
         }
+
         .year {
             font-weight: bold;
-            margin-right: 10px;
-        }
-        h1 {
-            text-align: center;
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -59,9 +66,7 @@
     <div class="container">
         <h1>高校保研率查询</h1>
 
-        <input id="search" placeholder="输入学校名称，例如：浙江大学" />
-
-        <!-- 新增的查询按钮 -->
+        <input id="inputSchool" placeholder="输入学校名称，例如：北京大学">
         <button onclick="searchSchool()">查询</button>
 
         <div id="result"></div>
