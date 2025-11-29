@@ -28,6 +28,20 @@
             border: 1px solid #ccc;
             font-size: 16px;
         }
+        button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #4a90e2;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #357ABD;
+        }
         .rate-item {
             padding: 8px 0;
             font-size: 17px;
@@ -46,6 +60,9 @@
         <h1>高校保研率查询</h1>
 
         <input id="search" placeholder="输入学校名称，例如：浙江大学" />
+
+        <!-- 新增的查询按钮 -->
+        <button onclick="searchSchool()">查询</button>
 
         <div id="result"></div>
     </div>
