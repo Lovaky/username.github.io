@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保研资格查询系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #4a5568;
+        }
+        
+        h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        #schoolInput {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        #schoolInput:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        #searchButton {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #searchButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        #searchButton:active {
+            transform: translateY(0);
+        }
+        
+        .tips {
+            margin-top: 20px;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .loading {
+            display: none;
+            margin-top: 15px;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🎓</div>
+        <h1>保研资格查询系统</h1>
+        <p class="subtitle">输入学校名称，查询历年保研率数据</p>
+        
+        <div class="search-box">
+            <input type="text" id="schoolInput" placeholder="请输入学校全称，例如：北京大学">
+        </div>
+        
+        <button id="searchButton">立即查询</button>
+        
+        <div class="loading" id="loading">
+            正在查询中...
+        </div>
+        
+        <div class="error-message" id="errorMessage">
+            未找到该学校信息，请检查学校名称是否正确
+        </div>
+        
+        <div class="tips">
+            💡 提示：请输入完整的学校名称，如"北京大学"而非"北大"
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const schoolInput = document.getElementById('schoolInput');
+            const searchButton = document.getElementById('searchButton');
+            const errorMessage = document.getElementById('errorMessage');
+            const loading = document.getElementById('loading');
+            
+            // 搜索功能
+            function searchSchool() {
+                const query = schoolInput.value.trim();
+                
+                if (!query) {
+                    schoolInput.focus();
+                    return;
+                }
+                
+                loading.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // 模拟搜索延迟，让用户体验更好
+                setTimeout(() => {
+                    const foundSchool = schoolData.find(school => 
+                        school.name === query
+                    );
+                    
+                    loading.style.display = 'none';
+                    
+                    if (foundSchool) {
+                        // 跳转到结果页面，传递学校名称作为参数
+                        window.location.href = `result.html?school=${encodeURIComponent(query)}`;
+                    } else {
+                        errorMessage.style.display = 'block';
+                        schoolInput.focus();
+                    }
+                }, 800);
+            }
+            
+            // 点击搜索按钮
+            searchButton.addEventListener('click', searchSchool);
+            
+            // 按回车键搜索
+            schoolInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchSchool();
+                }
+            });
+            
+            // 页面加载后自动聚焦输入框
+            schoolInput.focus();
+        });
+    </script>
+</body>
+</html>
